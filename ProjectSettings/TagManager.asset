@@ -24,6 +24,7 @@ TagManager:
   - Audio_Manager
   - Background
   - Enemy_Laser
+  - Thruster
   layers:
   - Default
   - TransparentFX

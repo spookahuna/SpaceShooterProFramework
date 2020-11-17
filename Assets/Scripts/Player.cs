@@ -10,6 +10,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speed = 3.5f;
     private float _speedMultiplier = 2;
+
+   //Thruster speed
+    private float _thruster = 7f;
+    
     [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
@@ -75,7 +79,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             //then activate Thrusters
-            _speed = 7f;
+            _speed = _thruster;
         }
         //if Left Shift key is depressed
         else
@@ -99,8 +103,15 @@ public class Player : MonoBehaviour
 
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
 
-        
-        transform.Translate(direction * _speed * Time.deltaTime);
+
+        if (_isSpeedBoostActive == false)
+        {
+            transform.Translate(direction * _speed * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(direction * _speed * _speedMultiplier * Time.deltaTime);
+        }
 
 
         if (transform.position.y >= 11.3f)
