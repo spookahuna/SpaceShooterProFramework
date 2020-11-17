@@ -71,6 +71,19 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        //if Left Shift key is pressed 
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            //then activate Thrusters
+            _speed = 7f;
+        }
+        //if Left Shift key is depressed
+        else
+        {
+            _speed = 3.5f;
+        }
+        //then return to normal speed
+        
         CalculateMovement();
 
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
