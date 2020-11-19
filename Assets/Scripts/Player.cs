@@ -13,7 +13,9 @@ public class Player : MonoBehaviour
 
    //Thruster speed
     private float _thruster = 7f;
-    
+    [SerializeField]
+    private bool _isThrusterActive;
+
     [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
@@ -80,11 +82,13 @@ public class Player : MonoBehaviour
         {
             //then activate Thrusters
             _speed = _thruster;
+            _isThrusterActive = true;
         }
         //if Left Shift key is depressed
         else
         {
             _speed = 3.5f;
+            _isThrusterActive = false;
         }
         //then return to normal speed
         
