@@ -25,6 +25,7 @@ TagManager:
   - Background
   - Enemy_Laser
   - Thruster
+  - Shield_Strength
   layers:
   - Default
   - TransparentFX
