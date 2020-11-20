@@ -170,7 +170,7 @@ public class Player : MonoBehaviour
                 {
 
                     ShieldStrengthFunction();
-            Debug.Log("ShieldStrengthFunction works!");
+                    Debug.Log("ShieldStrengthFunction works!");
                     //_shieldRend = GetComponent<Renderer>();
                     return;
                  }
@@ -212,32 +212,28 @@ public class Player : MonoBehaviour
     //Through UI onscreen or color changing of the shield.
     //Allow for 3 hits on the shield to accommodate visualization.
     public void ShieldStrengthFunction()
-{
-        ///*
-    {
-        _shieldStrengthLevel--;
-            switch (_shieldStrengthLevel)
             {
-                default:
-                    return;
-                case 2:
-                    Debug.Log("Case 2 got called");
-                    transform.GetComponent<SpriteRenderer>().color = Color.white;
-                    return;
-                case 1:
-                    transform.GetComponent<SpriteRenderer>().color = Color.red;
-                    return;
-                case 0:
-                    _shieldStrengthLevel = 3;
-                    _isShieldsActive = false;
-                    _shieldVisualizer.SetActive(false);
-                    transform.GetComponent<SpriteRenderer>().color = Color.red;
-                    return;
+            _shieldStrengthLevel--;
+            switch (_shieldStrengthLevel)
+                {
+                    default:
+                        Debug.Log("Default got called" + _shieldStrengthLevel);                   
+                        return;
+                    case 2:
+                        Debug.Log("Case 2 got called");
+                        _shieldVisualizer.transform.GetComponent<SpriteRenderer>().color = Color.white;
+                        return;
+                    case 1:
+                        _shieldVisualizer.transform.GetComponent<SpriteRenderer>().color = Color.red;
+                        return;
+                    case 0:
+                       _isShieldsActive = false; 
+                       _shieldVisualizer.transform.GetComponent<SpriteRenderer>().color = Color.blue;
+                       _shieldVisualizer.SetActive(false);
+                    
+                        return;
+                }
 
-        }
-    }
-
-        //*/
     }
     public void TripleShotActive()
     {
@@ -267,6 +263,7 @@ public class Player : MonoBehaviour
 
     public void ShieldsActive()
     {
+        _shieldStrengthLevel = 3;
         _isShieldsActive = true;
         _shieldVisualizer.gameObject.SetActive(true);
     }
