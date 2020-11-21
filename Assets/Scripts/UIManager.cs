@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     //handle for Ammo Counter text
-    [SerializeField]
-    private Text _ammoCounterText;
+    public Text _ammoCounterText;
 
     [SerializeField]
     private Text _scoreText;

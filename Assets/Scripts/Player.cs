@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private float _speed = 3.5f;
     private float _speedMultiplier = 2;
 
-   //Thruster speed
+    //Thruster speed
     private float _thruster = 7f;
     [SerializeField]
     private bool _isThrusterActive;
@@ -25,7 +25,9 @@ public class Player : MonoBehaviour
     private float _fireRate = 0.5f;
     private float _canFire = -1f;
 
-
+    //Ammo Functionality
+    [SerializeField]
+    private int _ammoCount = 15;
 
     [SerializeField]
     private int _lives = 3;
@@ -67,7 +69,7 @@ public class Player : MonoBehaviour
 
         if (_spawnManager == null)
         {
-            Debug.LogError("The Spawn Manager is NULL."); 
+            Debug.LogError("The Spawn Manager is NULL.");
         }
 
         if (_uiManager == null)
@@ -101,7 +103,7 @@ public class Player : MonoBehaviour
             _isThrusterActive = false;
         }
         //then return to normal speed
-        
+
         CalculateMovement();
 
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
@@ -109,9 +111,9 @@ public class Player : MonoBehaviour
             FireLaser();
         }
 
-        }
-        void CalculateMovement()
-        {
+    }
+    void CalculateMovement()
+    {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
@@ -131,7 +133,7 @@ public class Player : MonoBehaviour
         if (transform.position.y >= 11.3f)
         {
             transform.position = new Vector3(transform.position.x, 0, 0);
-        } 
+        }
         else if (transform.position.y <= -3.8f)
         {
             transform.position = new Vector3(transform.position.x, -3.8f, 0);
@@ -152,10 +154,11 @@ public class Player : MonoBehaviour
     //Subtract from 15 to 0 as lasers are fired
     //Disable laser at 0
     //Add audio clip of click when laser ammo counter is 0 when fired
-    void FireLaser()
-    {
 
-            _canFire = Time.time + _fireRate;
+    void FireLaser()
+    {    
+        _canFire = Time.time + _fireRate;
+        _ammoCount -= 1;
 
 
         if (_isTripleShotActive == true)
