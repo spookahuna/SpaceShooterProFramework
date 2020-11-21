@@ -47,10 +47,7 @@ public class UIManager : MonoBehaviour
         _scoreText.text = "Score: " + playerScore.ToString();
     }
 
-    public void UpdateAmmoCount(int playerAmmoCount)
-    {
-        _ammoCounterText.text = "Ammo: " + playerAmmoCount.ToString();
-    }
+
 
     public void UpdateLives(int currentLives)
     {

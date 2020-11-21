@@ -7,10 +7,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 
-//When the player is out of ammo 
-//provide feedback through on-screen elements or sound effects. 
-//(ex. beep or ammo count displayed on screen)
-
 {
     [SerializeField]
     private float _speed = 3.5f;
@@ -29,10 +25,7 @@ public class Player : MonoBehaviour
     private float _fireRate = 0.5f;
     private float _canFire = -1f;
 
-    [SerializeField]
-    private int _startAmmoCount = 15;
-    [SerializeField]
-    private int _ammoOut = 0;
+
 
     [SerializeField]
     private int _lives = 3;
@@ -58,9 +51,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private int _score;
-    //Ammo Count
-    [SerializeField]
-    private int _ammoCount;
+
     private UIManager _uiManager;
 
     [SerializeField]
@@ -167,10 +158,6 @@ public class Player : MonoBehaviour
 
             _canFire = Time.time + _fireRate;
 
-        if (_startAmmoCount <= _ammoOut)
-        {
-            
-        }
 
         if (_isTripleShotActive == true)
         {
@@ -197,15 +184,6 @@ public class Player : MonoBehaviour
                     return;
                  }
 
-/*
-                if (_isShieldsActive == true)
-                {
-                    _isShieldsActive = false; 
-                    _shieldVisualizer.gameObject.SetActive(false);
-                    return;
-                }
-
-*/
 
         _lives--;
 
@@ -296,12 +274,6 @@ public class Player : MonoBehaviour
     {
         _score += points;
         _uiManager.UpdateScore(_score);
-    }
-
-    public void SubtractAmmo(int ammo)
-    {
-        _ammoCount -= ammo;
-        _uiManager.UpdateAmmoCount(_ammoCount);
     }
 
 }
