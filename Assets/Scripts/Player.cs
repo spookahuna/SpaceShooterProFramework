@@ -39,11 +39,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _shieldVisualizer;
 
-    //Visualizer for shield strength between strong, medium, and weak.
+    //Shield Strength
     [SerializeField]
     private int _shieldStrengthLevel;
-    //[SerializeField]
-    //private bool _shieldStrengthVisualizer;
+    //Visualizer for shield color transition
     //Renderer _shieldRend;
 
     [SerializeField]
