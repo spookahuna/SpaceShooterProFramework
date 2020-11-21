@@ -167,10 +167,12 @@ public class Player : MonoBehaviour
 
             _canFire = Time.time + _fireRate;
 
+        /*
         if (_startAmmoCount <= _ammoOut)
         {
             
         }
+        */
 
         if (_isTripleShotActive == true)
         {
@@ -298,10 +300,11 @@ public class Player : MonoBehaviour
         _uiManager.UpdateScore(_score);
     }
 
+    /*
     public void SubtractAmmo(int ammo)
     {
         _ammoCount -= ammo;
         _uiManager.UpdateAmmoCount(_ammoCount);
     }
-
+    */
 }
