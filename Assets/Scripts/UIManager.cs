@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     //handle for Ammo Counter text
     [SerializeField]
     private Text _ammoCounterText;
+
     [SerializeField]
     private Text _scoreText;
     [SerializeField]
@@ -47,7 +48,7 @@ public class UIManager : MonoBehaviour
         _scoreText.text = "Score: " + playerScore.ToString();
     }
 
-
+    
 
     public void UpdateLives(int currentLives)
     {
