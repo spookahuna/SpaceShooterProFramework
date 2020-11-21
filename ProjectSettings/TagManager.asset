@@ -26,6 +26,7 @@ TagManager:
   - Enemy_Laser
   - Thruster
   - Shield_Strength
+  - Ammo_Count
   layers:
   - Default
   - TransparentFX

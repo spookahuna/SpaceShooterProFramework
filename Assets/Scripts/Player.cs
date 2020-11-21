@@ -6,6 +6,11 @@ using System.Threading;
 using UnityEngine;
 
 public class Player : MonoBehaviour
+
+//When the player is out of ammo 
+//provide feedback through on-screen elements or sound effects. 
+//(ex. beep or ammo count displayed on screen)
+
 {
     [SerializeField]
     private float _speed = 3.5f;
@@ -23,6 +28,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _fireRate = 0.5f;
     private float _canFire = -1f;
+
+    [SerializeField]
+    private int _startAmmoCount = 15;
+    [SerializeField]
+    private int _ammoOut = 0;
+
     [SerializeField]
     private int _lives = 3;
     private SpawnManager _spawnManager;
@@ -47,7 +58,9 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private int _score;
+    //Ammo Count
     [SerializeField]
+    private int _ammoCount;
     private UIManager _uiManager;
 
     [SerializeField]
@@ -145,10 +158,19 @@ public class Player : MonoBehaviour
 
     }
 
+    //Display 15 on ammo counter on UI at Game Start
+    //Subtract from 15 to 0 as lasers are fired
+    //Disable laser at 0
+    //Add audio clip of click when laser ammo counter is 0 when fired
     void FireLaser()
     {
 
             _canFire = Time.time + _fireRate;
+
+        if (_startAmmoCount <= _ammoOut)
+        {
+            
+        }
 
         if (_isTripleShotActive == true)
         {
@@ -156,7 +178,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
+            Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);        
         }
 
         _audioSource.Play(); 
@@ -216,21 +238,21 @@ public class Player : MonoBehaviour
             _shieldStrengthLevel--;
             switch (_shieldStrengthLevel)
                 {
-                    default:
-                        Debug.Log("Default got called" + _shieldStrengthLevel);                   
+                    default:                   
                         return;
                     case 2:
-                        Debug.Log("Case 2 got called");
-                        _shieldVisualizer.transform.GetComponent<SpriteRenderer>().color = Color.white;
+                        _shieldVisualizer.transform.GetComponent<SpriteRenderer>().color = Color.yellow;
+                        //transform.GetComponent<SpriteRenderer>().color = Color.yellow;
                         return;
                     case 1:
                         _shieldVisualizer.transform.GetComponent<SpriteRenderer>().color = Color.red;
+                        //transform.GetComponent<SpriteRenderer>().color = Color.red;
                         return;
                     case 0:
-                       _isShieldsActive = false; 
-                       _shieldVisualizer.transform.GetComponent<SpriteRenderer>().color = Color.blue;
-                       _shieldVisualizer.SetActive(false);
-                    
+                        _shieldVisualizer.transform.GetComponent<SpriteRenderer>().color = Color.blue;
+                        _isShieldsActive = false;
+                        //transform.GetComponent<SpriteRenderer>().color = Color.?;
+                        _shieldVisualizer.SetActive(false);  
                         return;
                 }
 
@@ -265,6 +287,7 @@ public class Player : MonoBehaviour
     {
         _shieldStrengthLevel = 3;
         _isShieldsActive = true;
+        _shieldVisualizer.transform.GetComponent<SpriteRenderer>().color = Color.blue;
         _shieldVisualizer.gameObject.SetActive(true);
     }
 
@@ -273,6 +296,12 @@ public class Player : MonoBehaviour
     {
         _score += points;
         _uiManager.UpdateScore(_score);
+    }
+
+    public void SubtractAmmo(int ammo)
+    {
+        _ammoCount -= ammo;
+        _uiManager.UpdateAmmoCount(_ammoCount);
     }
 
 }

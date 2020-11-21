@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    //handle to Text
+    //handle for Ammo Counter text
+    [SerializeField]
+    private Text _ammoCounterText;
     [SerializeField]
     private Text _scoreText;
     [SerializeField]
@@ -23,6 +25,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         _scoreText.text = "Score: " + 0;
+        _ammoCounterText.text = "Ammo: " + 15;
         _gameOverText.gameObject.SetActive(false);
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
 
@@ -42,6 +45,11 @@ public class UIManager : MonoBehaviour
     public void UpdateScore(int playerScore)
     {
         _scoreText.text = "Score: " + playerScore.ToString();
+    }
+
+    public void UpdateAmmoCount(int playerAmmoCount)
+    {
+        _ammoCounterText.text = "Ammo: " + playerAmmoCount.ToString();
     }
 
     public void UpdateLives(int currentLives)
