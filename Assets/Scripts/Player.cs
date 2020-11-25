@@ -4,18 +4,20 @@ using System.Collections.Specialized;
 using System.Security.Cryptography;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 
 {
+    //Script Communication between Player and UI
+
+
     [SerializeField]
     private float _speed = 3.5f;
     private float _speedMultiplier = 2;
 
     //Thruster speed
     private float _thruster = 7f;
-    [SerializeField]
-    private bool _isThrusterActive;
 
     [SerializeField]
     private GameObject _laserPrefab;
@@ -53,7 +55,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _score;
 
-    private UIManager _uiManager;
+    public UIManager _uiManager;
 
     [SerializeField]
     private AudioClip _laserSoundClip;
@@ -64,7 +66,7 @@ public class Player : MonoBehaviour
     {
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
-        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>(); 
         _audioSource = GetComponent<AudioSource>();
 
         if (_spawnManager == null)
@@ -94,19 +96,17 @@ public class Player : MonoBehaviour
         {
             //then activate Thrusters
             _speed = _thruster;
-            _isThrusterActive = true;
         }
-        //if Left Shift key is depressed
+        //else return to normal speed
         else
         {
             _speed = 3.5f;
-            _isThrusterActive = false;
         }
-        //then return to normal speed
+
 
         CalculateMovement();
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+        if (Input.GetKeyDown(KeyCode.Space) && _ammoCount > 0 && Time.time > _canFire)
         {
             FireLaser();
         }
@@ -151,15 +151,24 @@ public class Player : MonoBehaviour
     }
 
     //Display 15 on ammo counter on UI at Game Start
-    //Subtract from 15 to 0 as lasers are fired
-    //Disable laser at 0
+    //Subtract from 15 to 0 as lasers are fired - Happening only in Player's Inspector
+    //Disable laser at 0 - PAU
     //Add audio clip of click when laser ammo counter is 0 when fired
 
     void FireLaser()
-    {    
-        _canFire = Time.time + _fireRate;
+    {
         _ammoCount -= 1;
 
+        _canFire = Time.time + _fireRate;
+
+        if (_ammoCount < 0)
+        {
+            _ammoCount = 0;
+
+            //When ammo is empty Play empty ammo chamber sound.
+            //_audioSource
+
+        }
 
         if (_isTripleShotActive == true)
         {
@@ -172,8 +181,8 @@ public class Player : MonoBehaviour
 
         _audioSource.Play(); 
 
-    }
-
+    } 
+    
     public void Damage()
     {
 

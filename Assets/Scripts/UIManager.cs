@@ -5,8 +5,13 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    //handle for Ammo Counter text
-    public Text _ammoCounterText;
+    //Script Communication between UI and Player
+    [SerializeField]
+    private Player _playerScript;
+
+    //Ammo Counter in UI
+    //public int _ammo = 15;
+    //public Text _ammoCountText;
 
     [SerializeField]
     private Text _scoreText;
@@ -24,10 +29,11 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //_ammoCountText.text = "Ammo: " + _ammo;
         _scoreText.text = "Score: " + 0;
-        _ammoCounterText.text = "Ammo: " + 15;
         _gameOverText.gameObject.SetActive(false);
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
+        _playerScript = GameObject.Find("Player").GetComponent<Player>();
 
         if (_gameManager == null)
         {
@@ -39,15 +45,19 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+
+    public void UpdateAmmo(GameObject Player)
+        {
+        Debug.Log("The GameObject Player "+_playerScript);
+        }
 
     public void UpdateScore(int playerScore)
     {
         _scoreText.text = "Score: " + playerScore.ToString();
     }
 
-    
 
     public void UpdateLives(int currentLives)
     {

@@ -27,6 +27,7 @@ TagManager:
   - Thruster
   - Shield_Strength
   - Ammo_Count
+  - Ammo_Count_text
   layers:
   - Default
   - TransparentFX
