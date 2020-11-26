@@ -10,8 +10,8 @@ public class UIManager : MonoBehaviour
     private Player _playerScript;
 
     //Ammo Counter in UI
-    //public int _ammo = 15;
-    //public Text _ammoCountText;
+    public int _ammo = 15;
+    public Text _ammoCountText;
 
     [SerializeField]
     private Text _scoreText;
@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //_ammoCountText.text = "Ammo: " + _ammo;
+        _ammoCountText.text = "Ammo: " + _ammo;
         _scoreText.text = "Score: " + 0;
         _gameOverText.gameObject.SetActive(false);
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
@@ -48,14 +48,14 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void UpdateAmmo(GameObject Player)
-        {
-        Debug.Log("The GameObject Player "+_playerScript);
-        }
-
     public void UpdateScore(int playerScore)
     {
         _scoreText.text = "Score: " + playerScore.ToString();
+    }
+
+    public void UpdateAmmo()
+    { 
+        _ammoCountText.text = "Ammo: " + Player._ammoCount.ToString();
     }
 
 

@@ -28,8 +28,8 @@ public class Player : MonoBehaviour
     private float _canFire = -1f;
 
     //Ammo Functionality
-    [SerializeField]
-    private int _ammoCount = 15;
+    public static int _ammoCount = 15;
+    public static int _ammo;
 
     [SerializeField]
     private int _lives = 3;
@@ -109,6 +109,8 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && _ammoCount > 0 && Time.time > _canFire)
         {
             FireLaser();
+
+            Debug.Log("UI Update is being called after Fire Laser");
         }
 
     }
@@ -159,6 +161,8 @@ public class Player : MonoBehaviour
     {
         _ammoCount -= 1;
 
+        _uiManager.UpdateAmmo(); 
+
         _canFire = Time.time + _fireRate;
 
         if (_ammoCount < 0)
@@ -181,8 +185,8 @@ public class Player : MonoBehaviour
 
         _audioSource.Play(); 
 
-    } 
-    
+    }
+
     public void Damage()
     {
 
@@ -279,7 +283,6 @@ public class Player : MonoBehaviour
         _shieldVisualizer.transform.GetComponent<SpriteRenderer>().color = Color.blue;
         _shieldVisualizer.gameObject.SetActive(true);
     }
-
 
     public void AddScore(int points)
     {
