@@ -223,9 +223,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    //Visualize the strength of the shield. 
-    //Through UI onscreen or color changing of the shield.
-    //Allow for 3 hits on the shield to accommodate visualization.
     public void ShieldStrengthFunction()
             {
             _shieldStrengthLevel--;
