@@ -156,21 +156,16 @@ public class Player : MonoBehaviour
 
     }
 
-    //Add audio clip of click when laser ammo counter is 0 when fired
-
     void FireLaser()
     {
         _ammoCount -= 1;
+        _audioSource.PlayOneShot(_laserSoundClip, 0.3f);
 
         //Ammo depletion is communicated to UI here.
-        _uiManager.UpdateAmmo(); 
+        _uiManager.UpdateAmmo();
 
-        _canFire = Time.time + _fireRate;
-
-        if (_ammoCount < 0)
+        if (Input.GetKeyDown(KeyCode.Space) && _ammoCount <= 0)
         {
-            _ammoCount = 0;
-
             //When ammo is empty Play empty ammo chamber sound.
             _audioSource.PlayOneShot(_ammoEmpty, 1f);
 
@@ -184,10 +179,6 @@ public class Player : MonoBehaviour
         {
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);        
         }
-
-        _audioSource.Play();
-        //Custom volume for custom Laser sound
-        _audioSource.volume = 0.3f;
 
     }
 
