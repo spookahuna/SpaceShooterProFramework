@@ -59,6 +59,10 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private AudioClip _laserSoundClip;
+    //Empty Ammo sound
+    [SerializeField]
+    private AudioClip _ammoEmpty;
+
     private AudioSource _audioSource;
 
     // Start is called before the first frame update
@@ -83,9 +87,11 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("AudioSource is null!");
         }
+
         else
         {
             _audioSource.clip = _laserSoundClip;
+
         }
 
     }
@@ -109,8 +115,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && _ammoCount > 0 && Time.time > _canFire)
         {
             FireLaser();
-
-            Debug.Log("UI Update is being called after Fire Laser");
         }
 
     }
@@ -152,15 +156,13 @@ public class Player : MonoBehaviour
 
     }
 
-    //Display 15 on ammo counter on UI at Game Start
-    //Subtract from 15 to 0 as lasers are fired - Happening only in Player's Inspector
-    //Disable laser at 0 - PAU
     //Add audio clip of click when laser ammo counter is 0 when fired
 
     void FireLaser()
     {
         _ammoCount -= 1;
 
+        //Ammo depletion is communicated to UI here.
         _uiManager.UpdateAmmo(); 
 
         _canFire = Time.time + _fireRate;
@@ -170,7 +172,7 @@ public class Player : MonoBehaviour
             _ammoCount = 0;
 
             //When ammo is empty Play empty ammo chamber sound.
-            //_audioSource
+            _audioSource.PlayOneShot(_ammoEmpty, 1f);
 
         }
 
@@ -183,7 +185,9 @@ public class Player : MonoBehaviour
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);        
         }
 
-        _audioSource.Play(); 
+        _audioSource.Play();
+        //Custom volume for custom Laser sound
+        _audioSource.volume = 0.3f;
 
     }
 

@@ -829,7 +829,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerScript: {fileID: 992518950}
-  _ammo: 15
   _ammoCountText: {fileID: 241957896}
   _scoreText: {fileID: 949670525}
   _livesImg: {fileID: 1547551652}
@@ -1095,7 +1094,8 @@ MonoBehaviour:
   _rightEngine: {fileID: 382229120}
   _score: 0
   _uiManager: {fileID: 760689251}
-  _laserSoundClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+  _laserSoundClip: {fileID: 8300000, guid: e5dc046aa10841543ae8d9700d99ca99, type: 3}
+  _ammoEmpty: {fileID: 8300000, guid: 492ae4d4e93e8b841bbb1b5f342abaf1, type: 3}
 --- !u!212 &992518951
 SpriteRenderer:
   m_ObjectHideFlags: 0
