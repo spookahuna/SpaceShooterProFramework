@@ -158,7 +158,8 @@ public class Player : MonoBehaviour
 
     void FireLaser()
     {
-        _ammoCount -= 1;
+        _ammoCount --;
+
         _audioSource.PlayOneShot(_laserSoundClip, 0.3f);
 
         //Ammo depletion is communicated to UI here.
@@ -168,7 +169,6 @@ public class Player : MonoBehaviour
         {
             //When ammo is empty Play empty ammo chamber sound.
             _audioSource.PlayOneShot(_ammoEmpty, 1f);
-
         }
 
         if (_isTripleShotActive == true)
