@@ -276,6 +276,11 @@ public class Player : MonoBehaviour
         _shieldVisualizer.gameObject.SetActive(true);
     }
 
+    public void AmmoReloadActive()
+    {
+        _ammoCount = +15;
+    }
+
     public void AddScore(int points)
     {
         _score += points;

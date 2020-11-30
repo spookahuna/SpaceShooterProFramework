@@ -28,6 +28,8 @@ TagManager:
   - Shield_Strength
   - Ammo_Count
   - Ammo_Count_text
+  - Ammo_Powerup
+  - Laser_Reload
   layers:
   - Default
   - TransparentFX
