@@ -279,11 +279,11 @@ public class Player : MonoBehaviour
     {
         _ammoCount += 15;
     }
-    //Create a health collectable that heals the player by 1.
-    //Update the visuals of the Player to reflect this.
+
+    //HealthCollectableActive function adds 1 life to Player when HealthCollectablePowerup is collected.
     public void HealthCollectableActive()
     {
-        Debug.Log("Health Collectable Function is called!");
+        _lives += 1;
     }
 
     public void AddScore(int points)
