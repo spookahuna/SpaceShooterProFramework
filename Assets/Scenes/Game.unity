@@ -877,7 +877,7 @@ MonoBehaviour:
   - {fileID: 6946474010764396032, guid: 8a630f956056011419ae0fecd1932057, type: 3}
   - {fileID: 3405748341544360580, guid: 51293fe5e7c5dd946b4545f7902d3dbb, type: 3}
   - {fileID: 7258966436756524789, guid: 4653d6fded19f64438479e9d78d168be, type: 3}
-  - {fileID: 5391675347410654579, guid: 44f06ecd5e3cdae47b724d91264c8454, type: 3}
+  - {fileID: 7798880476900827619, guid: b7bde37e59d3e1042bb2f82aad30785e, type: 3}
   _stopSpawning: 0
 --- !u!4 &915613023
 Transform:

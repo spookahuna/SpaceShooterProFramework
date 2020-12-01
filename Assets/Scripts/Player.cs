@@ -280,7 +280,6 @@ public class Player : MonoBehaviour
         _ammoCount += 15;
     }
 
-    //HealthCollectableActive function adds 1 life to Player when HealthCollectablePowerup is collected.
     public void HealthCollectableActive()
     {
         _lives += 1;
