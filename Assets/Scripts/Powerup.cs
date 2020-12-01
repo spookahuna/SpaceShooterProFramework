@@ -48,7 +48,6 @@ public class Powerup : MonoBehaviour
                         player.AmmoReloadActive();
                         break;
                     default:
-                        Debug.Log("Default Value");
                     break;
 
                 }

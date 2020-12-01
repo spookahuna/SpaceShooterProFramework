@@ -97,6 +97,9 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        //Ammo depletion is communicated to UI here.
+        _uiManager.UpdateAmmo();
+
         //if Left Shift key is pressed 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -162,9 +165,6 @@ public class Player : MonoBehaviour
 
         _audioSource.PlayOneShot(_laserSoundClip, 0.3f);
 
-        //Ammo depletion is communicated to UI here.
-        _uiManager.UpdateAmmo();
-
         if (Input.GetKeyDown(KeyCode.Space) && _ammoCount <= 0)
         {
             //When ammo is empty Play empty ammo chamber sound.
@@ -189,7 +189,6 @@ public class Player : MonoBehaviour
                 {
 
                     ShieldStrengthFunction();
-                    Debug.Log("ShieldStrengthFunction works!");
                     //_shieldRend = GetComponent<Renderer>();
                     return;
                  }
@@ -278,7 +277,7 @@ public class Player : MonoBehaviour
 
     public void AmmoReloadActive()
     {
-        _ammoCount = +15;
+        _ammoCount += 15;
     }
 
     public void AddScore(int points)
