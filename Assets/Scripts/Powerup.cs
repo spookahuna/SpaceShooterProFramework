@@ -47,6 +47,9 @@ public class Powerup : MonoBehaviour
                     case 3:
                         player.AmmoReloadActive();
                         break;
+                    case 4:
+                        player.HealthCollectableActive();
+                        break;
                     default:
                     break;
 

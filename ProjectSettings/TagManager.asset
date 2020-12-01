@@ -30,6 +30,7 @@ TagManager:
   - Ammo_Count_text
   - Ammo_Powerup
   - Laser_Reload
+  - Health_Collectable_Powerup
   layers:
   - Default
   - TransparentFX
