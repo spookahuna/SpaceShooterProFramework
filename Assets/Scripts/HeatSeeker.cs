@@ -6,6 +6,11 @@ public class HeatSeeker : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 6.0f;
+
+    //Rotation Speed for heat seeker
+    [SerializeField]
+    private float _rotationSpeed = 200f;
+
     private bool _isEnemyHeatSeeker = false;
 
     // Start is called before the first frame update
@@ -21,6 +26,11 @@ public class HeatSeeker : MonoBehaviour
         {
             MoveDown();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
     void MoveUp()
