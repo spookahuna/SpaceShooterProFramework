@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
         {
             transform.Translate(direction * _speed * _speedMultiplier * Time.deltaTime);
         }
-
+ 
 
         if (transform.position.y >= 11.3f)
         {
@@ -193,22 +193,28 @@ public class Player : MonoBehaviour
                     return;
                  }
 
-
         _lives--;
+
+        if (_lives == 3)
+        {
+            Debug.Log("_lives >= 3 gets called!");
+            _leftEngine.SetActive(false);
+            _rightEngine.SetActive(false);
+
+        } 
 
         if (_lives == 2)
         {
             _leftEngine.SetActive(true);
+            _rightEngine.SetActive(false);
         }
 
-       else if (_lives ==1)
+       else if (_lives == 1)
         {
             _rightEngine.SetActive(true);
         }
 
-
         _uiManager.UpdateLives(_lives);
-
 
         if (_lives < 1)
         {
@@ -282,7 +288,26 @@ public class Player : MonoBehaviour
 
     public void HealthCollectableActive()
     {
-        _lives += 1;
+        if (_lives < 3)
+        {
+            _lives += 1;
+        }
+
+        if (_lives == 3)
+        {
+            Debug.Log("_lives >= 3 gets called!");
+            _leftEngine.SetActive(false);
+            _rightEngine.SetActive(false);
+
+        }
+
+        if (_lives == 2)
+        {
+            _leftEngine.SetActive(true);
+            _rightEngine.SetActive(false);
+        }
+
+        _uiManager.UpdateLives(_lives);
     }
 
     public void AddScore(int points)
