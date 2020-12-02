@@ -23,7 +23,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemyRoutine()
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(4.0f);
 
         while (_stopSpawning == false)
         {
@@ -38,14 +38,14 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnPowerupRoutine()
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(2.0f);
 
         while (_stopSpawning == false)
         {
             Vector3 postToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
-            int randomPowerUp = Random.Range(0, 5);
+            int randomPowerUp = Random.Range(0, 6);
             Instantiate(powerups[randomPowerUp], postToSpawn, Quaternion.identity);
-            yield return new WaitForSeconds(Random.Range(2, 6)); 
+            yield return new WaitForSeconds(Random.Range(2, 5)); 
         }
 
     }

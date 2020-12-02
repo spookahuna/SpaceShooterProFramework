@@ -31,6 +31,8 @@ TagManager:
   - Ammo_Powerup
   - Laser_Reload
   - Health_Powerup
+  - Heat_Seeker
+  - Heat_Seeker_Powerup
   layers:
   - Default
   - TransparentFX

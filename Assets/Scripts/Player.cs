@@ -23,6 +23,11 @@ public class Player : MonoBehaviour
     private GameObject _laserPrefab;
     [SerializeField]
     private GameObject _tripleShotPrefab;
+    
+    //Heat seeker Prefab
+    [SerializeField]
+    private GameObject _heatSeekerPrefab;
+    
     [SerializeField]
     private float _fireRate = 0.5f;
     private float _canFire = -1f;
@@ -36,6 +41,9 @@ public class Player : MonoBehaviour
     private SpawnManager _spawnManager;
 
     private bool _isTripleShotActive = false;
+    //Variable bool to turn on/off heat seeker
+    [SerializeField]
+    private bool _isHeatSeekerActive = false;
     private bool _isSpeedBoostActive = false;
     [SerializeField]
     private bool _isShieldsActive = false;
@@ -175,6 +183,16 @@ public class Player : MonoBehaviour
         {
             Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
         }
+
+        //Create a new form of projectile. 
+        //Include something new from multi direction shot, to heat seeking shots, etc
+        //Spawns rarely
+
+        if (_isHeatSeekerActive == true)
+        {
+            Instantiate(_heatSeekerPrefab, transform.position, Quaternion.identity);
+        }
+
         else
         {
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);        
@@ -257,6 +275,19 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         _isTripleShotActive = false;
+    }
+
+    public void HeatSeekerActive()
+    {
+        _isHeatSeekerActive = true;
+        StartCoroutine(HeatSeekerPowerDownRoutine());
+    }
+
+    //Replaces the standard fire for 5 seconds.
+    IEnumerator HeatSeekerPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _isHeatSeekerActive = false;
     }
 
     public void SpeedBoostActive()

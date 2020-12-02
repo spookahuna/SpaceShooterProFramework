@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
     private float _speed = 4.0f;
     [SerializeField]
     private GameObject _laserPrefab;
+    [SerializeField]
+    private GameObject _heatSeekerPrefab;
 
     private Player _player;
     private Animator _anim;
@@ -85,7 +87,7 @@ public class Enemy : MonoBehaviour
         }
 
 
-        if (other.tag == "Laser")
+        if (other.tag == "Laser" || other.tag == "Heat_Seeker")
         {
             Destroy(other.gameObject);
 
@@ -101,5 +103,6 @@ public class Enemy : MonoBehaviour
             Destroy(GetComponent<Collider2D>());
             Destroy(this.gameObject, 2.0f);
         }
+
     }
 }
