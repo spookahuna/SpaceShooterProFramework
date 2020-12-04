@@ -15,9 +15,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speed = 3.5f;
     private float _speedMultiplier = 2;
+    private float _maxSpeed = 7f;
 
     //Thruster speed and UI Thruster Bar Slider control
     private float _thruster = 7f;
+    private float _thrusterBarSpeedIncrement = 14f;
     public ThrusterBar _thrusterLevel;
 
     [SerializeField]
@@ -114,10 +116,18 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             //then activate Thrusters
-            _speed = _thruster;
+            _speed += _thrusterBarSpeedIncrement * Time.deltaTime;
+            
+            //Limit top speed of Thruster to 7f
+            if (_speed > _maxSpeed)
+            {
+                Mathf.Clamp((_speed -= _thrusterBarSpeedIncrement * Time.deltaTime), 0, _maxSpeed);
+            }
+            
             //and activate Thruster Bar Level
-            _thrusterLevel.SetThrusterLevel(_thruster);
+            _thrusterLevel.SetThrusterLevel(_speed);
         }
+        
         //else return to normal speed
         else
         {
@@ -127,7 +137,7 @@ public class Player : MonoBehaviour
         }
 
 
-    CalculateMovement();
+        CalculateMovement();
 
         if (Input.GetKeyDown(KeyCode.Space) && _ammoCount > 0 && Time.time > _canFire)
         {
