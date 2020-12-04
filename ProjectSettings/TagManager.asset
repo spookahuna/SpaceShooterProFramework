@@ -33,6 +33,10 @@ TagManager:
   - Health_Powerup
   - Heat_Seeker
   - Heat_Seeker_Powerup
+  - Thruster_Bar
+  - Thruster_Bar_BG
+  - Thruster_Bar_HUD
+  - Thruster_text
   layers:
   - Default
   - TransparentFX

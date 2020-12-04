@@ -16,8 +16,9 @@ public class Player : MonoBehaviour
     private float _speed = 3.5f;
     private float _speedMultiplier = 2;
 
-    //Thruster speed
+    //Thruster speed and UI Thruster Bar Slider control
     private float _thruster = 7f;
+    public ThrusterBar _thrusterLevel;
 
     [SerializeField]
     private GameObject _laserPrefab;
@@ -78,7 +79,7 @@ public class Player : MonoBehaviour
     {
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
-        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>(); 
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
 
         if (_spawnManager == null)
@@ -102,6 +103,7 @@ public class Player : MonoBehaviour
 
         }
 
+
     }
     void Update()
     {
@@ -113,15 +115,19 @@ public class Player : MonoBehaviour
         {
             //then activate Thrusters
             _speed = _thruster;
+            //and activate Thruster Bar Level
+            _thrusterLevel.SetThrusterLevel(_thruster);
         }
         //else return to normal speed
         else
         {
             _speed = 3.5f;
+            //and set Thruster Level back
+            _thrusterLevel.SetThrusterLevel(_speed);
         }
 
 
-        CalculateMovement();
+    CalculateMovement();
 
         if (Input.GetKeyDown(KeyCode.Space) && _ammoCount > 0 && Time.time > _canFire)
         {

@@ -8,8 +8,12 @@ public class Enemy : MonoBehaviour
     private float _speed = 4.0f;
     [SerializeField]
     private GameObject _laserPrefab;
+    
+    //Heat Seeker
     [SerializeField]
     private GameObject _heatSeekerPrefab;
+
+    public static Transform _target;
 
     private Player _player;
     private Animator _anim;

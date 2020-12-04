@@ -2,34 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeatSeeker : MonoBehaviour
+public class HeatSeekerSimple : MonoBehaviour
 {
     //Script Communication between HeatSeeker to Enemy
     [SerializeField]
     private Enemy _enemyScript;
 
     //Target variable for Heat Seeker to Destroy
-    [SerializeField]
-    private Transform _target;
+    private GameObject _enemyTarget;
 
-    private float _speed = 5.0f;
-
-    //Rotation Speed for heat seeker
-    [SerializeField]
-    private float _rotationSpeed = 100f;
+    private float _speed = 6.0f;
 
     private bool _isEnemyHeatSeeker = false;
-
-    private Rigidbody2D _rigidBody;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Calling the RigidBody
-        _rigidBody = GetComponent<Rigidbody2D>();
-
+        _enemyTarget = GameObject.Find("Enemy(Clone)");
+        
+        if (_enemyTarget == null)
+        {
+            Debug.LogError("HeatSeeker: _enemyTarget is null");
+        }
     }
-    
     // Update is called once per frame
     void Update()
     {
@@ -37,55 +32,32 @@ public class HeatSeeker : MonoBehaviour
         {
             MoveUp();
         }
-        
         else
         {
             MoveDown();
         }
     }
 
-    private void FixedUpdate()
-    {
-        
-        //if (_target != null)
-        
-        //{
+     void HomingMissleMovement()
+     {
 
-            Vector2 direction = (Vector2)_target.position - _rigidBody.position;
+         Vector3 _enemyPosition;
+         Vector3 _misslePosition;
 
-            direction.Normalize();
+         _enemyTarget = GameObject.Find("Enemy(Clone)");
 
-            float _rotateAmount = Vector3.Cross(direction, transform.up).z;
+         if (_enemyTarget == null)
+         {
+             Debug.LogError("HeatSeeker: _enemyTarget is null");
+         }
 
-            _rigidBody.angularVelocity = -_rotateAmount * _rotationSpeed;
+         else
+         {
+             _enemyPosition = _enemyTarget.transform.position;
+             _misslePosition = this.transform.position;
+         }
+     }
 
-            _rigidBody.velocity = transform.up * _speed;
-        //}
-
-    }
-
-   /*
-    void HomingMissleMovement()
-    {
-
-        Vector3 _enemyPosition;
-        Vector3 _misslePosition;
-
-        _enemyTarget = GameObject.Find("Enemy(Clone)");
-        
-        if (_enemyTarget == null)
-        {
-            Debug.LogError("HeatSeeker: _enemyTarget is null");
-        }
-
-        else
-        {
-            _enemyPosition = _enemyTarget.transform.position;
-            _misslePosition = this.transform.position;
-        }
-    }
-    */
-    
     void MoveUp()
     {
         transform.Translate(Vector3.up * _speed * Time.deltaTime);
