@@ -19,16 +19,28 @@ public class CameraShake : MonoBehaviour
     {
         _shakeAmount = _amount;
         InvokeRepeating("BeginShake", 0, 0.01f);
+        Invoke("StopShake", _length);
     }
 
     void BeginShake()
     {
+        if (_shakeAmount > 0)
+        {
+            Vector3 _cameraPosition = _mainCamera.transform.position;
+            
+            float _axisOffsetAmountX = Random.value * _shakeAmount * 2 - _shakeAmount;
+            float _axisOffsetAmountY = Random.value * _shakeAmount * 2 - _shakeAmount;
+            _cameraPosition.x += _axisOffsetAmountX;
+            _cameraPosition.y += _axisOffsetAmountY;
 
+            _mainCamera.transform.position = _cameraPosition;
+        }
     }
 
     void StopShake()
     {
-
+        CancelInvoke("BeginShake");
+        _mainCamera.transform.localPosition = Vector3.zero;
     }
 
 }

@@ -37,6 +37,8 @@ TagManager:
   - Thruster_Bar_BG
   - Thruster_Bar_HUD
   - Thruster_text
+  - Fire_Icon_ui
+  - Camera
   layers:
   - Default
   - TransparentFX

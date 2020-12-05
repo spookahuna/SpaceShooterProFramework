@@ -126,6 +126,8 @@ public class Player : MonoBehaviour
             
             //and activate Thruster Bar Level
             _thrusterLevel.SetThrusterLevel(_speed);
+            //Increase size of Thruster sprite when Thruster is active
+            UIManager.FindObjectOfType<FireIconUI>().transform.localScale = new Vector3(1.5f, 1.5f, 1);
         }
         
         //else return to normal speed
@@ -134,6 +136,8 @@ public class Player : MonoBehaviour
             _speed = 3.5f;
             //and set Thruster Level back
             _thrusterLevel.SetThrusterLevel(_speed);
+            //Return Thruster sprite to original size when Thruster is inactive
+            UIManager.FindObjectOfType<FireIconUI>().transform.localScale = new Vector3(1, 1f, 1);
         }
 
 
@@ -215,7 +219,7 @@ public class Player : MonoBehaviour
         }
 
     }
-
+     
     public void Damage()
     {
 
