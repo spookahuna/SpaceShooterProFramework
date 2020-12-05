@@ -15,6 +15,7 @@ public class CameraShake : MonoBehaviour
             _mainCamera = Camera.main;
     }
 
+    //Test to check if Camera Shake works. Delete after testing.
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.T))

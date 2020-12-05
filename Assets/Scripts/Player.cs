@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
 {
     //Reference to CameraShake Script
-    CameraShake cameraShake;
+    CameraShake _cameraShake;
     //Amount of Camera Shake from Laser
     private float _cameraShakeAmountFromDamage = 0.1f;
 
@@ -84,7 +84,13 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
-        _audioSource = GetComponent<AudioSource>();
+        _cameraShake = GameObject.Find("Game_Manager").GetComponent<CameraShake>();
+
+        if (_cameraShake == null)
+        {
+            Debug.LogError("No CameraShake script is called");
+        }
+            _audioSource = GetComponent<AudioSource>();
 
         if (_spawnManager == null)
         {
@@ -206,9 +212,6 @@ public class Player : MonoBehaviour
             Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
         }
 
-        //Create a new form of projectile. 
-        //Include something new from multi direction shot, to heat seeking shots, etc
-        //Spawns rarely
 
         if (_isHeatSeekerActive == true)
         {
@@ -224,8 +227,10 @@ public class Player : MonoBehaviour
      
     public void Damage()
     {
+        //Camera Shake from Enemy damage
+        _cameraShake.Shake(_cameraShakeAmountFromDamage, 0.2f);
 
-                if (_isShieldsActive == true)
+        if (_isShieldsActive == true)
                 {
 
                     ShieldStrengthFunction();
@@ -240,7 +245,7 @@ public class Player : MonoBehaviour
             
             _leftEngine.SetActive(false);
             _rightEngine.SetActive(false);
-
+            
         } 
 
         if (_lives == 2)
