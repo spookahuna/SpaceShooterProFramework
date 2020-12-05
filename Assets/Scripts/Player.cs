@@ -32,8 +32,7 @@ public class Player : MonoBehaviour
     //Heat seeker Prefab
     [SerializeField]
     private GameObject _heatSeekerPrefab;
-    
-    [SerializeField]
+
     private float _fireRate = 0.5f;
     private float _canFire = -1f;
 
@@ -60,7 +59,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _shieldStrengthLevel;
     //Visualizer for shield color transition
-    //Renderer _shieldRend;
+
 
     [SerializeField]
     private GameObject _leftEngine, _rightEngine;
@@ -134,8 +133,8 @@ public class Player : MonoBehaviour
             
             //and activate Thruster Bar Level
             _thrusterLevel.SetThrusterLevel(_speed);
-            //Increase size of Thruster sprite when Thruster is active
-            UIManager.FindObjectOfType<FireIconUI>().transform.localScale = new Vector3(1.5f, 1.5f, 1);
+            //Increase size of Thruster sprite on Thruster Bar when Thruster is active
+            UIManager.FindObjectOfType<FireIconUI>().transform.localScale = new Vector3(1.5f, 1.8f, 1);
         }
         
         //else return to normal speed
@@ -234,7 +233,6 @@ public class Player : MonoBehaviour
                 {
 
                     ShieldStrengthFunction();
-                    //_shieldRend = GetComponent<Renderer>();
                     return;
                  }
 
@@ -276,17 +274,14 @@ public class Player : MonoBehaviour
                     default:                   
                         return;
                     case 2:
-                        _shieldVisualizer.transform.GetComponent<SpriteRenderer>().color = Color.yellow;
-                        //transform.GetComponent<SpriteRenderer>().color = Color.yellow;
+                        _shieldVisualizer.transform.GetComponent<SpriteRenderer>().color = Color.yellow;                 
                         return;
                     case 1:
-                        _shieldVisualizer.transform.GetComponent<SpriteRenderer>().color = Color.red;
-                        //transform.GetComponent<SpriteRenderer>().color = Color.red;
+                        _shieldVisualizer.transform.GetComponent<SpriteRenderer>().color = Color.red;                       
                         return;
                     case 0:
                         _shieldVisualizer.transform.GetComponent<SpriteRenderer>().color = Color.blue;
                         _isShieldsActive = false;
-                        //transform.GetComponent<SpriteRenderer>().color = Color.?;
                         _shieldVisualizer.SetActive(false);  
                         return;
                 }
@@ -310,7 +305,7 @@ public class Player : MonoBehaviour
         StartCoroutine(HeatSeekerPowerDownRoutine());
     }
 
-    //Replaces the standard fire for 5 seconds.
+
     IEnumerator HeatSeekerPowerDownRoutine()
     {
         yield return new WaitForSeconds(5.0f);
@@ -353,7 +348,6 @@ public class Player : MonoBehaviour
 
         if (_lives == 3)
         {
-            Debug.Log("_lives >= 3 gets called!");
             _leftEngine.SetActive(false);
             _rightEngine.SetActive(false);
 
