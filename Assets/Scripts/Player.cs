@@ -9,8 +9,10 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 
 {
-    //Script Communication between Player and UI
-
+    //Reference to CameraShake Script
+    CameraShake cameraShake;
+    //Amount of Camera Shake from Laser
+    private float _cameraShakeAmountFromDamage = 0.1f;
 
     [SerializeField]
     private float _speed = 3.5f;
@@ -235,7 +237,7 @@ public class Player : MonoBehaviour
 
         if (_lives == 3)
         {
-            Debug.Log("_lives >= 3 gets called!");
+            
             _leftEngine.SetActive(false);
             _rightEngine.SetActive(false);
 

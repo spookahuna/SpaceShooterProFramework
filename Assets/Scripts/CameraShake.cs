@@ -15,6 +15,14 @@ public class CameraShake : MonoBehaviour
             _mainCamera = Camera.main;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Shake(0.1f, 0.2f);
+        }
+    }
+
     public void Shake(float _amount, float _length)
     {
         _shakeAmount = _amount;
