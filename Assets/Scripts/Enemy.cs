@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    //Enemy Movement
+    [SerializeField]
+    private float _magnitude = 5f;
+    private float _swaySpeed = 1f;
+    
     [SerializeField]
     private float _speed = 4.0f;
     [SerializeField]
@@ -58,17 +63,23 @@ public class Enemy : MonoBehaviour
             }
         }
 
+        //Enemy movement from Right to Left
+        transform.position = new Vector3((Mathf.Sin(Time.time * _swaySpeed) * _magnitude), transform.position.y, transform.position.z);
+
+
     }
 
     void CalculateMovement()
     {
+        float randomX = Random.Range(-8f, 8f);
+
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
         if (transform.position.y < -5f)
         {
-            float randomX = Random.Range(-8f, 8f);
-            transform.position = new Vector3(randomX, 7, 0);
+            transform.position = new Vector3(randomX, 7, 0);   
         }
+
     }
     
     private void OnTriggerEnter2D(Collider2D other)
