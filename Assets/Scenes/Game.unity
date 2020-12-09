@@ -1052,8 +1052,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 503fc8aa6952adf43a45145b4607ba99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 2518143938483161568, guid: 065a5320cc7bab441b6e32a421b98ed8,
+  _easyEnemy: {fileID: 2518143938483161568, guid: 065a5320cc7bab441b6e32a421b98ed8,
     type: 3}
+  _mediumEnemy: {fileID: 0}
+  _hardEnemy: {fileID: 0}
+  _bossEnemy: {fileID: 0}
   _enemyContainer: {fileID: 1292584554}
   powerups:
   - {fileID: 1909934233987119824, guid: f8a7cacdd86867d43822e016803da143, type: 3}
@@ -1063,6 +1066,17 @@ MonoBehaviour:
   - {fileID: 7798880476900827619, guid: b7bde37e59d3e1042bb2f82aad30785e, type: 3}
   - {fileID: 2902525698174774523, guid: 591ab588b8bb4e341b8496692a09d79b, type: 3}
   _stopSpawning: 0
+  enemyLevel: 0
+  _totalEnemy: 10
+  _numEnemy: 0
+  _spawnedEnemy: 0
+  _waveSpawn: 0
+  _spawn: 1
+  _spawnType: 0
+  _waveTimer: 30
+  _timeTillNextWave: 0
+  _totalWaves: 5
+  _numWaves: 0
 --- !u!4 &915613023
 Transform:
   m_ObjectHideFlags: 0

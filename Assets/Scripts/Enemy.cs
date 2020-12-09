@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    //Spawner script communication
+    private SpawnManager _spawnManager;
+    //private GameObject _objSpawnManager;
+    [SerializeField]
+    private int _spawnerID;
+
+    //Enemy Waves Functionality
+
     //Enemy Movement
     [SerializeField]
     private float _magnitude = 5f;
@@ -30,6 +38,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
+        _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+        //_objSpawnManager = GameObject.FindWithTag("Spawn_Manager");
         _audioSource = GetComponent<AudioSource>();
 
         if (_player == null)
@@ -81,7 +91,12 @@ public class Enemy : MonoBehaviour
         }
 
     }
-    
+
+    void setName(int sName)
+    {
+        _spawnerID = sName;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
 
@@ -97,17 +112,19 @@ public class Enemy : MonoBehaviour
             _anim.SetTrigger("OnEnemyDeath");
             _speed = 0;
             _audioSource.Play();
-             
+
             Destroy(this.gameObject, 2.0f);
         }
 
 
         if (other.tag == "Laser" || other.tag == "Heat_Seeker")
         {
+            _spawnManager.BroadcastMessage("killedEnemy", _spawnerID);
             Destroy(other.gameObject);
 
             if (_player != null)
             {
+                _spawnManager.killedEnemy(1);
                 _player.AddScore(10);
             }
 

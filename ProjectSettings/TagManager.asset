@@ -39,6 +39,8 @@ TagManager:
   - Thruster_text
   - Fire_Icon_ui
   - Camera
+  - Spawner
+  - Spawner.cs
   layers:
   - Default
   - TransparentFX

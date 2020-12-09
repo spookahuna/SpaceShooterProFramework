@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 
-{
+{   
     //Reference to CameraShake Script
     CameraShake _cameraShake;
     //Amount of Camera Shake from Laser
