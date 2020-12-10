@@ -54,7 +54,7 @@ public class SpawnManager : MonoBehaviour
     public _enemyLevels enemyLevel = _enemyLevels._easy;
     //-----------------------------------
     //How many Enemies have been created. How many Enemies need to be created.
-    public int _totalEnemy = 10;
+    public int _totalEnemy = 3;
     [SerializeField]
     private int _numEnemy = 0;
     [SerializeField]
@@ -89,6 +89,11 @@ public class SpawnManager : MonoBehaviour
         _enemies.Add(_enemyLevels._boss, _bossEnemy);
     }
 
+    public void Update()
+    {
+        
+    }
+
     public void StartSpawning()
     {
         StartCoroutine(SpawnEnemyRoutine());
@@ -99,12 +104,56 @@ public class SpawnManager : MonoBehaviour
     {
         yield return new WaitForSeconds(4.0f);
 
-        while (_stopSpawning == false)
+        //Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
+        //GameObject newEnemy = Instantiate(_enemies[enemyLevel], posToSpawn, Quaternion.identity);
+        //newEnemy.SendMessage("setName", _spawnID);
+        //_numEnemy++;
+        //_spawnedEnemy++;
+        //newEnemy.transform.parent = _enemyContainer.transform;
+
+        while (_waveSpawn == false && _stopSpawning == false)
         {
             Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
-            GameObject newEnemy = Instantiate(_easyEnemy, posToSpawn, Quaternion.identity);
+            GameObject newEnemy = Instantiate(_enemies[enemyLevel], posToSpawn, Quaternion.identity);
             newEnemy.SendMessage("setName", _spawnID);
+            _numEnemy++;
+            _spawnedEnemy++;
             newEnemy.transform.parent = _enemyContainer.transform;
+
+            if (_spawn)
+            {
+                //Spawns Enemies in Waves. Spawns more Enemies when ALL Enemies die.
+                if (_spawnType == _spawnTypes._wave)
+                {
+                    if (_numWaves < _totalWaves + 1)
+                    {
+                        if (_waveSpawn)
+                        {
+                            //Spawns an Enemy
+                            SpawnEnemyRoutine();
+                            //Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
+                            //GameObject newEnemy = Instantiate(_enemies[enemyLevel], posToSpawn, Quaternion.identity);
+                            //newEnemy.SendMessage("setName", _spawnID);
+                            //_numEnemy++;
+                            //_spawnedEnemy++;
+                            //newEnemy.transform.parent = _enemyContainer.transform;
+                        }
+                        if (_numEnemy == 0)
+                        {
+                            //Enables the Enemy Wave Spawner
+                            _waveSpawn = true;
+                            //Increase number of Enemy Waves
+                            _numWaves++;
+                        }
+                        if (_numEnemy == _totalEnemy)
+                        {
+                            //Disables Enemy Wave Spawner
+                            _waveSpawn = false;
+                        }
+                    }
+                }
+            }
+                
             yield return new WaitForSeconds(5.0f);
 
         }
