@@ -36,6 +36,7 @@ public class Asteroid : MonoBehaviour
             _anim.SetBool("Explode", true);
             _audioSource.Play();
             _spawnManager.StartSpawning();
+            _spawnManager.StartSpawning();
             Destroy(this.gameObject, 0.25f);
         }
     }

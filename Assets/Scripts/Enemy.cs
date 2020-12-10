@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    void setName(int sName)
+    void Enemy1(int sName = 1)
     {
         _spawnerID = sName;
     }

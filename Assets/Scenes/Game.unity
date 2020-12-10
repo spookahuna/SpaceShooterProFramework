@@ -1068,7 +1068,7 @@ MonoBehaviour:
   - {fileID: 2902525698174774523, guid: 591ab588b8bb4e341b8496692a09d79b, type: 3}
   _stopSpawning: 0
   enemyLevel: 0
-  _totalEnemy: 3
+  _totalEnemy: 1
   _numEnemy: 0
   _spawnedEnemy: 0
   _waveSpawn: 0

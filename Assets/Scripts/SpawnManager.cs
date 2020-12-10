@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    [SerializeField]
+    private Enemy _enemy;
     //-----------------------------------
     // Enemy Prefabs
     [SerializeField]
@@ -54,7 +56,7 @@ public class SpawnManager : MonoBehaviour
     public _enemyLevels enemyLevel = _enemyLevels._easy;
     //-----------------------------------
     //How many Enemies have been created. How many Enemies need to be created.
-    public int _totalEnemy = 3;
+    public int _totalEnemy = 2;
     [SerializeField]
     private int _numEnemy = 0;
     [SerializeField]
@@ -82,44 +84,41 @@ public class SpawnManager : MonoBehaviour
     public void Start()
     {
         //Randomizes Spawner ID
-        _spawnID = Random.Range(1, 500);
+        //_spawnID = Random.Range(1, 500);
+        _spawnID = 1;
         _enemies.Add(_enemyLevels._easy, _easyEnemy);
         _enemies.Add(_enemyLevels._medium, _mediumEnemy);
         _enemies.Add(_enemyLevels._hard, _hardEnemy);
         _enemies.Add(_enemyLevels._boss, _bossEnemy);
     }
 
-    public void Update()
+    // spawns an enemy based on the enemy level that you selected
+    public void SpawnEnemy()
     {
-        
+        Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
+        GameObject newEnemy = Instantiate(_enemies[enemyLevel], posToSpawn, Quaternion.identity);
+        newEnemy.SendMessage("Enemy1", _spawnID); 
+        _numEnemy++;
+        _spawnedEnemy++;
+        newEnemy.transform.parent = _enemyContainer.transform;
     }
 
+   
     public void StartSpawning()
     {
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerupRoutine());
     }
 
+
     IEnumerator SpawnEnemyRoutine()
     {
         yield return new WaitForSeconds(4.0f);
 
-        //Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
-        //GameObject newEnemy = Instantiate(_enemies[enemyLevel], posToSpawn, Quaternion.identity);
-        //newEnemy.SendMessage("setName", _spawnID);
-        //_numEnemy++;
-        //_spawnedEnemy++;
-        //newEnemy.transform.parent = _enemyContainer.transform;
+        SpawnEnemy();
 
-        while (_waveSpawn == false && _stopSpawning == false)
+        while (_waveSpawn == false && _spawn == true && _stopSpawning == false)
         {
-            Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
-            GameObject newEnemy = Instantiate(_enemies[enemyLevel], posToSpawn, Quaternion.identity);
-            newEnemy.SendMessage("setName", _spawnID);
-            _numEnemy++;
-            _spawnedEnemy++;
-            newEnemy.transform.parent = _enemyContainer.transform;
-
             if (_spawn)
             {
                 //Spawns Enemies in Waves. Spawns more Enemies when ALL Enemies die.
@@ -129,14 +128,7 @@ public class SpawnManager : MonoBehaviour
                     {
                         if (_waveSpawn)
                         {
-                            //Spawns an Enemy
-                            SpawnEnemyRoutine();
-                            //Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
-                            //GameObject newEnemy = Instantiate(_enemies[enemyLevel], posToSpawn, Quaternion.identity);
-                            //newEnemy.SendMessage("setName", _spawnID);
-                            //_numEnemy++;
-                            //_spawnedEnemy++;
-                            //newEnemy.transform.parent = _enemyContainer.transform;
+                            SpawnEnemy();
                         }
                         if (_numEnemy == 0)
                         {
@@ -160,6 +152,15 @@ public class SpawnManager : MonoBehaviour
         
     }
 
+    //Returns the Time Till the Next Wave
+    public float TimeTillWave
+    {
+        get
+        {
+            return _timeTillNextWave;
+        }
+    }
+
     IEnumerator SpawnPowerupRoutine()
     {
         yield return new WaitForSeconds(2.0f);
@@ -176,22 +177,23 @@ public class SpawnManager : MonoBehaviour
 
     public void killedEnemy(int spawnerID)
     {
-        //If enemy spawnerId is equal to this spawnerID then remove an Enemy count
+        //If Enemy's spawnerId is equal to this spawnerID then remove an Enemy count
         if (_spawnID == spawnerID)
         {
             _numEnemy--;
         }
     }
 
-    //Enable the Spawner based on spawnerID
-    public void enableSpawner(int spawnerID)
-    {
-        if (_spawnID == spawnerID)
-        {
-            _spawn = true;
-        }
-    }
-    //Disable the Spawner based on spawnerID
+   //Enables the Spawner based on spawnerID
+   public void enableSpawner(int spawnerID)
+   {
+       if (_spawnID == spawnerID)
+       {
+           _spawn = true;
+       }
+   }
+
+    //Disables Spawner based on spawnerID
     public void disableSpawner(int spawnerID)
     {
         if (_spawnID == spawnerID)
@@ -199,20 +201,12 @@ public class SpawnManager : MonoBehaviour
             _spawn = false;
         }
     }
+       //Enables Spawner. Method needs for SpawnID
+       public void enableSpawnTrigger()
+       {
+           _spawn = true;
+       }
 
-    //Returns the "Time Till the next Spawn Enemy Wave" for an Interface, etc.
-    public float TimeTillNextWave
-    {
-        get
-        {
-            return _timeTillNextWave;
-        }
-    }
-    //Enables the spawner. Use this function to trigger events because you don't know the spawner's ID.
-    public void enableTrigger()
-    {
-        _spawn = true;
-    }
 
     public void OnPlayerDeath()
     {
