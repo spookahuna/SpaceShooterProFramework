@@ -39,6 +39,10 @@ TagManager:
   - Thruster_text
   - Fire_Icon_ui
   - Camera
+  - Ekahi
+  - Elua
+  - Ekolu
+  - Alii
   layers:
   - Default
   - TransparentFX
