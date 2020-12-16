@@ -51,7 +51,7 @@ public class Powerup : MonoBehaviour
                         player.HealthCollectableActive();
                         break;
                     case 5:
-                        player.HeatSeekerActive();
+                        player.HeatSeekerActive(); 
                         break;
                     default:
                     break;
