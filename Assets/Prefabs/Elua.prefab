@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6746451115564403316}
-  - component: {fileID: 7178177345010184774}
   - component: {fileID: 1974592982472295506}
   - component: {fileID: 1972856747997502682}
   - component: {fileID: 6792100671130819927}
   - component: {fileID: 6950865677261598886}
   - component: {fileID: 7132821753386753185}
+  - component: {fileID: 6016567866535314801}
   m_Layer: 0
   m_Name: Elua
   m_TagString: Elua
@@ -36,25 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180.118}
---- !u!114 &7178177345010184774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6746451115564403272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e4fef59a345bed4ea0e6714bf8c0451, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spawnerID: 0
-  _magnitude: 5
-  _speed: 4
-  _laserPrefab: {fileID: 8332636757307086374, guid: e27f2892379292744bfc6445ab5ca941,
-    type: 3}
-  _heatSeekerPrefab: {fileID: 7792188923723906281, guid: 1548350e4044b4e42a15a474e463c5d3,
-    type: 3}
 --- !u!212 &1974592982472295506
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -267,3 +248,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6016567866535314801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6746451115564403272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fe992e1e2925d5478bfd1c6a9ff1233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
